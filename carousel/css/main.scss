@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Muli:400,700&display=swap');
+$width: 300px;
+$color: white;
+body{
+    margin:0; //Reset margin
+    height: calc(100vh -8em);
+    font-family: 'Muli', 'san-serif';
+    background:$color;
+}
+h1{
+    text-align: center;
+    margin: 4em;
+}
+
+.container{
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    .items{
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        animation: carouselAnim 4s infinite alternate linear; //go forever, end alternate direction, easing is linear
+        .entry{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            width: 300px;
+            background: white;
+            margin: 1em;
+            padding: .5em;
+            border-radius: 10px;
+            box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.05);
+
+            p{
+                text-align:center;
+                padding:1em;
+
+            }
+            p.name{
+                font-weight:bold;
+            }
+            @keyframes carouselAnim{
+                from{
+                    transform: translate(0,0);
+                }
+                to{
+                    transform: translate(calc(-100% + (5 * 300px))); //-100% going off the screen, calculate it so it hit the edge
+                }
+            }
+
+        }
+    }
+    @media only screen and (max-width: 768px){
+        .items{
+            animation: carouselAnim 1s infinite alternate linear;
+        }
+        @keyframes carouselAnim{
+            from{
+                transform: translate(0,0);
+            }
+            to{
+                transform: translate(calc(-100% + (2 * 300px))); //-100% going off the screen, calculate it so it hit the edge
+            }
+        }
+    }
+
+
+ 
+    .faders{
+        width: 100%;
+        position: absolute;
+        height: 100%;
+        .left, .right{
+            background: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); //https://www.colorzilla.com/gradient-editor/
+            width: 20%;
+            height: 100%;
+            position: absolute;
+            z-index: 200;
+
+
+        }
+        .right{
+            right: 0;
+            background: linear-gradient(to left, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%);
+
+        }
+    }
+}
+
